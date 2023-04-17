@@ -21,9 +21,7 @@ app.get("/alumnos",async (req,resp) =>{
     resp.send(listaAlumno)
 })
 
-app.listen(PUERTO, () => { 
-    console.log(`Servidor web iniciado en puerto ${PUERTO}`)
-})
+
 //LOGIN
 app.post("/login",async (req,res) => {
     const email = req.body.email
@@ -45,4 +43,53 @@ app.post("/login",async (req,res) => {
             verify: true
         })
     }
+})
+
+
+//POST PARA REGISTRO USUARIO
+app.post("/registro", async (req, res) => {
+    const email = req.body.email
+    console.log(email)
+    const usuarioExistente = await Alumno.findAll({
+        where : {
+            CORREO: email
+        }
+    })
+    console.log(usuarioExistente);
+    console.log(usuarioExistente.length)
+    if (usuarioExistente.length == 0){
+        try {
+            const nuevoAlumno = await Alumno.create({
+                
+                DNI : req.body.dni,
+                Apellido: req.body.lastName,
+                NOMBRE_COLEGIO : req.body.nombre_colegio,
+                NOMBRE: req.body.name,
+                EDAD : req.body.edad,
+                GRADO : req.body.grado,
+                PASSWORD : req.body.password,
+                TELEFONO : req.body.telefono,
+                CORREO: email,
+            });
+            console.log(nuevoAlumno);
+            res.send({
+                verify: true
+            })
+            return      
+        } catch (error) {
+            res.send({
+                error : `ERROR. ${error}`
+            })
+            return
+        }  
+    }else{res.send({
+        verify: false,
+    })}
+    console.log(res.json().verify)
+})
+
+
+
+app.listen(PUERTO, () => { 
+    console.log(`Servidor web iniciado en puerto ${PUERTO}`)
 })

@@ -28,6 +28,10 @@ const Alumno = sequelize.define("Alumno",{
         type :DataTypes.STRING (200),
         allowNull : false,
     },
+    CORREO : {
+        type :DataTypes.STRING (200),
+        allowNull : false,
+    },
     EDAD:{
         type : DataTypes.NUMERIC(3),
         allowNull : false,
@@ -38,16 +42,13 @@ const Alumno = sequelize.define("Alumno",{
     },
     PASSWORD : {
         type :DataTypes.STRING (50),
-        allowNull : false,
+        allowNull : true,
     },
     TELEFONO:{
         type : DataTypes.NUMERIC(9),
         allowNull : false,
     },
-    CORREO:{
-        type :DataTypes.STRING (200),
-        allowNull : false,
-    }
+    
 }, {
     timestamps : false,
     freezeTableName : true

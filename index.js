@@ -76,6 +76,29 @@ app.post("/login",async (req,res) => {
     }
 })
 
+//LOGIN PROFESOR
+app.post("/loginP",async (req,res) => {
+    const email = req.body.email
+    const password = req.body.password
+    const ProfesorRegistrado = await Profesor.findAll({
+        where: {
+            CORREO : email,
+            PASSWORD : password
+
+        }
+    })
+    if (ProfesorRegistrado.length == 0){
+        // No existe usuario
+        res.send({
+            verify: false
+        })
+    } else{
+        res.send({
+            verify: true
+        })
+    }
+})
+
 
 //POST PARA REGISTRO USUARIO
 app.post("/registro", async (req, res) => {

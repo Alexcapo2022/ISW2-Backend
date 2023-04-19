@@ -150,5 +150,5 @@ const Colegio = sequelize.define("Colegio",{
 
 
 module.exports = {
-    Alumno,Curso,Profesor,Colegio
+    Alumno,Curso,Profesor,Colegio,sequelize
 }

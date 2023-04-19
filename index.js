@@ -2,7 +2,8 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
-const {Alumno,Curso,Profesor,Colegio} = require("./dao")
+const {Alumno,Curso,Profesor,Colegio,sequelize} = require("./dao")
+const { where } = require("underscore")
 
 const PUERTO = process.env.PORT || 4444
 
@@ -29,7 +30,11 @@ app.get("/cursos",async (req,resp) =>{
 
 //CURSOS EXTRAS
 app.get("/cursosExtras",async (req,resp) =>{
-    const listaCurso = await Curso.findAll()
+    const listaCurso = await Curso.findAll({
+        where: {
+            GRADO : "EXTRA",
+        }
+})
 
     resp.send(listaCurso)
 })

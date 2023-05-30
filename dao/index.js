@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 // postgres://<USUARIO>:<PASSWORD>@<URL_HOST_BD>:<PUERTO_BD>/<NOMBRE_BD>
 
 const CADENA_CONEXION = 
-    process.env.DATABASE_URL || "postgresql://Alex:euler2020@localhost:5432/Estudiando.pe"
+    process.env.DATABASE_URL || "postgresql://postgres:DYGnFsVRYRgFDAipbRSB@postgresql://postgres:DYGnFsVRYRgFDAipbRSB@containers-us-west-147.railway.app:7275/railway"
     const sequelize = new Sequelize(CADENA_CONEXION)
 
 const Alumno = sequelize.define("Alumno",{
